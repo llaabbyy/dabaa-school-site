@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مدرسة الضبعة النووية</title>
+<style>
+    /* ----- Reset ----- */
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { font-family: 'Arial', sans-serif; background: linear-gradient(to bottom, #e0f7e9, #a5d6a7); color:#333; line-height:1.6; transition: all 0.3s; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ----- Header ----- */
+    header {
+        background: linear-gradient(90deg, #2e7d32, #66bb6a);
+        color:white;
+        text-align:center;
+        padding:60px 20px;
+        border-bottom: 5px solid #1b5e20;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    header h1 { font-size:45px; margin-bottom:10px; text-shadow: 2px 2px 5px rgba(0,0,0,0.3); }
+    header p { font-size:20px; color:#e0f7e9; }
+
+    /* ----- Main ----- */
+    main { max-width:1300px; margin:40px auto; padding:0 20px; }
+
+    section { margin-bottom:50px; background:white; padding:35px; border-radius:15px; box-shadow:0 0 25px rgba(0,0,0,0.1); transition: transform 0.3s; }
+    section:hover { transform: translateY(-5px); }
+
+    h2 { color:#2e7d32; margin-bottom:25px; border-bottom:3px solid #66bb6a; display:inline-block; padding-bottom:7px; font-size:28px; }
+
+    /* ----- Cards ----- */
+    .cards { display:flex; flex-wrap:wrap; gap:25px; }
+    .card {
+        background-color: #c8e6c9;
+        flex:1 1 300px;
+        padding:25px;
+        border-radius:15px;
+        box-shadow:0 0 20px rgba(0,0,0,0.1);
+        cursor:pointer;
+        transition: transform 0.3s, box-shadow 0.3s;
+        position: relative;
+    }
+    .card:hover { transform:translateY(-7px); box-shadow:0 0 35px rgba(0,0,0,0.3); }
+    .card h3 { color:#2e7d32; margin-bottom:12px; font-size:22px; }
+    .card p { display:none; margin-top:12px; text-align:justify; }
+    .card.active p { display:block; }
+
+    /* ----- Lists ----- */
+    ul { list-style-type:square; padding-right:25px; font-size:18px; }
+    li { margin-bottom:12px; }
+
+    /* ----- Facebook Button ----- */
+    .fb-link {
+        display:inline-block;
+        background:#4267B2;
+        color:white;
+        padding:15px 25px;
+        border-radius:10px;
+        font-size:20px;
+        margin-top:15px;
+        transition: background 0.3s, transform 0.3s;
+    }
+    .fb-link:hover { background:#365899; transform:scale(1.05); }
+
+    /* ----- Footer ----- */
+    footer { background:#2e7d32; color:white; text-align:center; padding:25px; font-size:16px; border-top:5px solid #1b5e20; }
+
+    /* ----- Responsive ----- */
+    @media(max-width:900px){ .cards{flex-direction:column;} section{padding:25px;} }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>مدرسة الضبعة النووية</h1>
+    <p>المدرسة الفنية المتقدمة لتكنولوجيا الطاقة النووية</p>
+</header>
+
+<main>
+
+<section id="about">
+    <h2>عن المدرسة</h2>
+    <p>
+        مدرسة الضبعة النووية هي أول مدرسة فنية متقدمة لتكنولوجيا الطاقة النووية في مصر.
+        تهدف لتأهيل الطلاب للعمل في محطة الضبعة النووية وتزويدهم بالمعرفة العملية والنظرية.
+        المدرسة شراكة بين وزارة التربية والتعليم، هيئة الطاقة الذرية، ومحطة الضبعة النووية لتوليد الكهرباء.
+    </p>
+</section>
+
+<section id="admission">
+    <h2>القبول وشروط التقديم</h2>
+    <ul>
+        <li>المجموع المطلوب: 260 درجة على الأقل في الشهادة الإعدادية.</li>
+        <li>المواد العلمية: متوسط 95% على الأقل في الرياضيات، العلوم، واللغة الإنجليزية.</li>
+        <li>العمر: ألا يزيد عن 18 سنة في 1 أكتوبر من عام التقديم.</li>
+        <li>الجنسية: الطالب مصري من أبوين مصريين.</li>
+        <li>اختبارات القبول: اختبار إلكتروني، مقابلة شخصية، والكشف الطبي.</li>
+    </ul>
+</section>
+
+<section id="departments">
+    <h2>الأقسام الدراسية</h2>
+    <div class="cards">
+        <div class="card" onclick="toggleCard(this)">
+            <h3>قسم الكهرباء</h3>
+            <p>
+                قسم الكهرباء يهتم بالكهرباء الصناعية والطاقة النووية. يشمل التدريب العملي على المحولات، المولدات، أنظمة التحكم الذكية، مشاريع عملية،
+                وتقييم مستمر للطلاب. يوفر فرص عمل ممتازة بعد التخرج في محطات الطاقة النووية والصناعة الكهربائية.
+            </p>
+        </div>
+        <div class="card" onclick="toggleCard(this)">
+            <h3>قسم الميكانيكا</h3>
+            <p>
+                قسم الميكانيكا يهتم بالصيانة الميكانيكية وتصميم المعدات للمحطات النووية.
+                يحتوي على ورش عملية، مشاريع تطبيقية، ودورات على أحدث المعدات الصناعية.
+                الطلاب يتعلمون الديناميكا الحرارية، المحركات، وأنظمة النقل الميكانيكية للمعدات الثقيلة.
+            </p>
+        </div>
+        <div class="card" onclick="toggleCard(this)">
+            <h3>قسم الإلكترونيات</h3>
+            <p>
+                قسم الإلكترونيات يهتم بالدارات الكهربائية، الأنظمة الذكية، وأجهزة التحكم.
+                يشمل مختبرات عملية، مشاريع هندسية، ودورات تدريبية على أحدث التكنولوجيا في مجال الطاقة النووية.
+            </p>
+        </div>
+    </div>
+</section>
+
+<section id="facebook">
+    <h2>انضم إلى مجتمعنا على الفيسبوك</h2>
+    <a href="https://www.facebook.com/groups/3302741273312091" target="_blank" class="fb-link">زيارة المجموعة على الفيسبوك</a>
+</section>
+
+<section id="management">
+    <h2>الإدارة</h2>
+    <div><strong>مدير المدرسة:</strong> المهندس أحمد فتحي</div>
+    <div><strong>إعداد وتطوير الموقع:</strong> أحمد جعفر</div>
+</section>
+
+</main>
+
+<footer>
+    &copy; 2025 مدرسة الضبعة النووية. جميع الحقوق محفوظة.
+</footer>
+
+<script>
+function toggleCard(card){
+    card.classList.toggle('active');
+}
+</script>
+
+</body>
+</html>
