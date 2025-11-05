@@ -69,6 +69,49 @@
 
     /* ----- Responsive ----- */
     @media(max-width:900px){ .cards{flex-direction:column;} section{padding:25px;} }
+/* ----- Slider Styles ----- */
+.slider-container {
+    width: 100%;
+    max-height: 500px;
+    overflow: hidden;
+    position: relative;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+    background:#000;
+}
+
+.slider-container img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.8s ease;
+}
+
+#slider-caption {
+    position: absolute;
+    bottom: 22px;
+    right: 30px;
+    left: 30px;
+    background: rgba(0,0,0,0.46);
+    padding: 14px 18px;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 20px;
+    line-height: 1.6;
+    font-weight: 600;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+    direction: rtl;
+    /* لمنع النص من الانزلاق خارج الصندوق عند الشاشات الصغيرة */
+    max-height: 180px;
+    overflow: auto;
+}
+@media (max-width: 900px) {
+    .slider-container img { height: 320px; }
+    #slider-caption { font-size: 16px; bottom: 12px; left: 12px; right: 12px; }
+}
+
 </style>
 </head>
 <body>
@@ -77,6 +120,12 @@
     <h1>مدرسة الضبعة النووية</h1>
     <p>المدرسة الفنية المتقدمة لتكنولوجيا الطاقة النووية</p>
 </header>
+<!-- START: Slider (ضع هذا بعد </header>) -->
+<div class="slider-container" aria-live="polite">
+    <img id="slider-img" src="images/1.jpg" alt="صورة من مدرسة الضبعة">
+    <div id="slider-caption" role="status" aria-atomic="true"></div>
+</div>
+<!-- END: Slider -->
 
 <main>
 
@@ -149,6 +198,71 @@
 function toggleCard(card){
     card.classList.toggle('active');
 }
+</script>
+<script>
+/* Slider configuration */
+const images = [
+    "images/1.jpg",
+    "images/2.jpg",
+    "images/3.jpg",
+    "images/4.jpg",
+    "images/5.jpg"
+];
+
+const captions = [
+    "يظهر في الصورة الدكتور عمرو بصيلة، أحد أبرز المساهمين في تطوير منظومة التعليم الفني في مصر، ومسؤول عن دعم وتأهيل المدارس المتقدمة والمتخصصة مثل مدرسة الضبعة النووية.",
+    "المهندس أحمد فتحي، مدير مدرسة الضبعة النووية، قائد إداري يسعى لترسيخ الانضباط والتميز داخل المدرسة، ويعمل على دعم الطلاب وتأهيلهم للمستقبل المهني المرتبط بالطاقة النووية.",
+    "هنا تبدأ رحلة المستقبل… مدرسة الضبعة النووية، بيئة تعليمية متطورة لإعداد جيل قادر على قيادة مشروعات الطاقة النووية في مصر.",
+    "نموذج المفاعل والتجهيزات التعليمية التي يتدرب عليها الطلاب، تمثل قلب التدريب العملي حيث تُبنى الخبرات والكفاءات المتخصصة.",
+    "في هذا المشهد يقف الطلاب بانتظام في طابور الصباح، حاملين روح الانتماء والجدية، فالزي الموحد رمز للانضباط والاحترام الذي تنشده المدرسة."
+];
+
+let index = 0;
+const imgEl = document.getElementById("slider-img");
+const captionEl = document.getElementById("slider-caption");
+
+const SLIDE_DURATION = 20000; // 20 ثانية
+const WORD_DELAY = 280; // وقت بين كل كلمة (ملّي ثانية) — اضبط لو عايز أسرع أو أبطأ
+
+function typeCaptionWords(text, doneCallback) {
+    const words = text.split(" ");
+    captionEl.textContent = ""; // ابدأ فاضي
+    let i = 0;
+    function writeNext() {
+        if (i < words.length) {
+            captionEl.textContent += (i === 0 ? "" : " ") + words[i];
+            i++;
+            setTimeout(writeNext, WORD_DELAY);
+        } else {
+            // خلصت الكتابة
+            if (typeof doneCallback === "function") doneCallback();
+        }
+    }
+    writeNext();
+}
+
+function showSlide() {
+    // ضع الصورة الحالية
+    imgEl.style.opacity = 0;
+    // نبدل الصورة بعد جزء من الـ fade
+    setTimeout(() => {
+        imgEl.src = images[index];
+        // بداية كتابة النص بعد تحميل الصورة
+        imgEl.onload = () => {
+            imgEl.style.opacity = 1;
+            // ابدأ كتابة الوصف
+            typeCaptionWords(captions[index]);
+        };
+    }, 200); // مطابقة للانتقال الذي في CSS
+
+    // جهز الفهرس للصورة التالية
+    index = (index + 1) % images.length;
+}
+
+// أول عرض: نعرض الصورة الأولى ونكتب وصفها ثم نعمل interval
+showSlide();
+// نستخدم interval لكن نضمن أن طول الكتابة أقل من مدة السلايد (WORD_DELAY * كلمات <= SLIDE_DURATION)
+setInterval(showSlide, SLIDE_DURATION);
 </script>
 
 </body>
